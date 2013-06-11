@@ -61,9 +61,9 @@
         // only for iPad
         // mailer.modalPresentationStyle = UIModalPresentationPageSheet;
         
-        [self presentModalViewController:mailer animated:YES];
+      //  [self presentModalViewController:mailer animated:YES];
         
-        [mailer release];
+      //  [mailer release];
     }
     else
     {
@@ -73,7 +73,7 @@
                                               cancelButtonTitle:@"OK" 
                                               otherButtonTitles: nil];
         [alert show];
-        [alert release];
+     //   [alert release];
     }
 
 }

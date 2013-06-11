@@ -1,0 +1,164 @@
+// !$*UTF8*$!
+{
+	3E021F741767CA39007E3C19 /* GradeBook */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = GradeBook;
+		sourceDirectories = (
+		);
+	};
+	3E021F7A1767CA3A007E3C19 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+	};
+	3E021F7B1767CA3A007E3C19 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	3E021F7C1767CA50007E3C19 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3E38C9F41766EE470092AF40 /* AssignmentDataTable.h */;
+		name = "AssignmentDataTable.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 399;
+		vrLoc = 0;
+	};
+	3E021F7D1767CA50007E3C19 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3E38CA021766EE470092AF40 /* CreateTypeViewController.h */;
+		name = "CreateTypeViewController.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 487;
+		vrLoc = 34;
+	};
+	3E021F7E1767CA50007E3C19 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 3E38CA031766EE470092AF40 /* CreateTypeViewController.m */;
+	};
+	3E021F7F1767CA50007E3C19 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3E38C9F41766EE470092AF40 /* AssignmentDataTable.h */;
+		name = "AssignmentDataTable.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 399;
+		vrLoc = 0;
+	};
+	3E021F801767CA50007E3C19 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3E38CA021766EE470092AF40 /* CreateTypeViewController.h */;
+		name = "CreateTypeViewController.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 487;
+		vrLoc = 34;
+	};
+	3E021F811767CA50007E3C19 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3E38CA031766EE470092AF40 /* CreateTypeViewController.m */;
+		name = "CreateTypeViewController.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 324;
+		vrLoc = 0;
+	};
+	3E38C9F41766EE470092AF40 /* AssignmentDataTable.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {519, 294}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 399}";
+		};
+	};
+	3E38CA021766EE470092AF40 /* CreateTypeViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {519, 294}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{34, 487}";
+		};
+	};
+	3E38CA031766EE470092AF40 /* CreateTypeViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {519, 2786}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 324}";
+		};
+	};
+	4DEE95B4172A442800C7EC83 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 3E021F741767CA39007E3C19 /* GradeBook */;
+		activeTarget = 4DEE95BB172A442800C7EC83 /* GradeBook */;
+		codeSenseManager = 3E021F7B1767CA3A007E3C19 /* Code sense */;
+		executables = (
+			3E021F741767CA39007E3C19 /* GradeBook */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					341,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 392677945;
+			PBXWorkspaceStateSaveDate = 392677945;
+		};
+		perUserProjectItems = {
+			3E021F7C1767CA50007E3C19 /* PBXTextBookmark */ = 3E021F7C1767CA50007E3C19 /* PBXTextBookmark */;
+			3E021F7D1767CA50007E3C19 /* PBXTextBookmark */ = 3E021F7D1767CA50007E3C19 /* PBXTextBookmark */;
+			3E021F7E1767CA50007E3C19 /* PBXBookmark */ = 3E021F7E1767CA50007E3C19 /* PBXBookmark */;
+			3E021F7F1767CA50007E3C19 /* PBXTextBookmark */ = 3E021F7F1767CA50007E3C19 /* PBXTextBookmark */;
+			3E021F801767CA50007E3C19 /* PBXTextBookmark */ = 3E021F801767CA50007E3C19 /* PBXTextBookmark */;
+			3E021F811767CA50007E3C19 /* PBXTextBookmark */ = 3E021F811767CA50007E3C19 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 3E021F7A1767CA3A007E3C19 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	4DEE95BB172A442800C7EC83 /* GradeBook */ = {
+		activeExec = 0;
+		executables = (
+			3E021F741767CA39007E3C19 /* GradeBook */,
+		);
+	};
+}
