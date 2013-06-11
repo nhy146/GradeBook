@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ContactViewController : UIViewController
-
+@property (strong, nonatomic) NSMutableArray *dataArray;
 @end

@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface Type : NSObject
+@property (strong,nonatomic) NSString *cid;
+@property (strong,nonatomic) NSString *type;
+@property (strong,nonatomic) NSString *weight;
 
 @end
