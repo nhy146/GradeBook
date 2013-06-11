@@ -13,7 +13,7 @@
 #import "TAssignmentViewController.h"
 #import "Course.h"
 #import "Item.h"
-
+#import "CreateTypeViewController.h"
 
 
 @interface TCourseViewController ()
@@ -43,12 +43,14 @@ NSIndexPath *deleteIndexPath;
     
     NSString *post =[NSString stringWithFormat:@"cid=%@",course.cid];
     
+    NSLog(@"%@",post);
+    
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
-    [request setURL:[NSURL URLWithString:@"http://lsucptg434gb.summerhost.info/app_file/tview_item.php"]];
+    [request setURL:[NSURL URLWithString:@"http://lsucptg434gb.summerhost.info/app_file/tview_type.php"]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -61,14 +63,16 @@ NSIndexPath *deleteIndexPath;
     NSDictionary * dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:responseData error:&error];
     NSArray *rows = [[NSArray alloc] init];
     if (dict) {
+        NSLog(@"Hello");
         rows = [dict objectForKey:@"records"];
     }
+    NSLog(@"Row: %@",rows);
     typeList = [[NSMutableArray alloc] init];
     if([rows count] == 0) {
         NSLog(@"No type returned\n");
     } else {
         NSLog(@"There are %i type(s)", [rows count]);
-        for (int k = 0; k < [rows count]; k++) {
+            for (int k = 0; k < [rows count]; k++) {
             NSDictionary *typeDict = [rows objectAtIndex:k];
             [typeList addObject:[typeDict objectForKey:@"type"]];
         }
@@ -202,6 +206,22 @@ NSIndexPath *deleteIndexPath;
     
     NSString *sectionName;
     sectionName = [typeList objectAtIndex:section];
+    /*switch (section)
+    {
+        case 0:
+            sectionName = NSLocalizedString(@"Current", @"Current");
+            break;
+        case 1:
+            sectionName = NSLocalizedString(@"Previous", @"Previous");
+            break;
+        case 2:
+            sectionName = NSLocalizedString(@"Upcoming", @"Upcoming");
+            break;
+            // ...
+        default:
+            sectionName = @"";
+            break;
+    }*/
     return sectionName;
 }
 
@@ -275,11 +295,21 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         CreateAssignmentViewController *cAssigvc = [segue destinationViewController];
         NSString *cid = course.cid;
         [cAssigvc setCid: cid];
-        [cAssigvc setTypeList:typeList];
-        NSLog(@"CID %@",cid);
+        [cAssigvc setTypeList: typeList];
         
+    } else if ([[segue identifier] isEqualToString:@"TCourseViewToCreateType"]) {
+        CreateTypeViewController *cTypevc = [segue destinationViewController];
+        NSLog(@"\n\nCID = um wat %@",course.cid);
+        NSString *cid = course.cid;
+        [cTypevc setCid: cid];
     }
 }
 
+
+- (IBAction)returnToTCourseActionForSegue:(UIStoryboardSegue *)returnSegue {
+    
+    // do useful actions here.
+    
+}
 
 @end

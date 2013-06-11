@@ -11,8 +11,6 @@
 #import "TCourseViewController.h"
 #import "Course.h"
 #import "Teacher.h"
-#import "TCourseViewController.h"
-#import "CreateCourseViewController.h"
 
 @interface THomeViewController ()
 
@@ -301,14 +299,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         NSMutableArray *array1 = [dataArray objectAtIndex:indexPath.section];
         Course *cellValue = [array1 objectAtIndex:indexPath.row];
         [tcoursevc setCourse: cellValue];
-        //[tcoursevc setTeacherId:tid];
         //need php code to get course id using teacher id and course name
-    }else if ([[segue identifier] isEqualToString:@"THomeToCreateCourse"])
-    {
-        CreateCourseViewController *createcoursevc = [segue destinationViewController];
-        NSIndexPath * indexPath = (NSIndexPath*)sender;
-        NSLog(@"%@",indexPath);
-        [createcoursevc setTeacher: teacher];
     }
 }
 
