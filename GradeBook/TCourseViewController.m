@@ -13,7 +13,7 @@
 #import "TAssignmentViewController.h"
 #import "Course.h"
 #import "Item.h"
-
+#import "CreateTypeViewController.h"
 
 
 @interface TCourseViewController ()
@@ -297,6 +297,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         [cAssigvc setCid: cid];
         [cAssigvc setTypeList: typeList];
         
+    } else if ([[segue identifier] isEqualToString:@"TCourseViewToCreateType"]) {
+        CreateTypeViewController *cTypevc = [segue destinationViewController];
+        NSLog(@"\n\nCID = um wat %@",course.cid);
+        NSString *cid = course.cid;
+        [cTypevc setCid: cid];
     }
 }
 

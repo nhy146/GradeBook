@@ -7,13 +7,15 @@
 //
 
 #import "CreateTypeViewController.h"
+#import "CJSONDeserializer.h"
+#import "Type.h"
 
 @interface CreateTypeViewController ()
 
 @end
 
 @implementation CreateTypeViewController
-@synthesize dataArray, typelistTable;
+@synthesize typeList, typelistTable, course, type, cid;
 CGFloat				 animatedDistance;
 NSIndexPath *deleteIndexPath;
 
@@ -32,17 +34,106 @@ NSIndexPath *deleteIndexPath;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //First section data
-    NSMutableArray *firstItemsArray = [[NSMutableArray alloc] initWithObjects:@"Hellos", @"Item 2", @"Item 3", nil];
+    NSLog(@"cid=%@\n",cid);
+    
+    NSString *post =[NSString stringWithFormat:@"cid=%@",cid];
+    
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
+    [request setURL:[NSURL URLWithString:@"http://lsucptg434gb.summerhost.info/app_file/tview_type.php"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    
+    NSHTTPURLResponse* urlResponse = nil;
+    NSError *error = [[NSError alloc] init];
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+    NSDictionary * dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:responseData error:&error];
+    NSArray *rows = [[NSArray alloc] init];
+    if (dict) {
+        rows = [dict objectForKey:@"records"];
+    }
+    typeList = [[NSMutableArray alloc] init];
+    if([rows count] == 0) {
+        NSLog(@"No type returned\n");
+    } else {
+        NSLog(@"There are %i type(s)", [rows count]);
+        for (int k = 0; k < [rows count]; k++) {
+            NSDictionary *typeDict = [rows objectAtIndex:k];
+            [typeList addObject:[typeDict objectForKey:@"type"]];
+        }
+    }
+    NSLog(@"%i",[typeList count]);
+    
+    request = [[NSMutableURLRequest alloc]init];
+    [request setURL:[NSURL URLWithString:@"http://lsucptg434gb.summerhost.info/app_file/tview_type.php"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    
+    
+    urlResponse = nil;
+    error = [[NSError alloc] init];
+    responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+    dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:responseData error:&error];
+    rows = [[NSArray alloc] init];
+    if (dict)
+    {
+        rows = [dict objectForKey:@"records"]; //select jsonarray called "records"
+    }
+    
+    NSLog(@"Course Array: %@",rows); //Log json
+    typeList = [[NSMutableArray alloc] init];
+    if([rows count] == 0){
+        NSLog(@"nothing returned\n");
+        //[self alertStatus:@"Incorrect username or password" :@"Login Failed!"];
+    } else {
+        NSLog(@"dictionary count = %i",[rows count]);
+        for (int i = 0; i< [rows count];i++) {
+            NSDictionary *typeDict = [rows objectAtIndex:i];
+            type = [[Type alloc] initWithId:[typeDict objectForKey:@"cid"] type:[typeDict objectForKey:@"type"] weight:[typeDict objectForKey:@"weight"]];
+            [typeList addObject:type];
+        }
+        NSLog (@"typeList: %i",[typeList count]);
+        NSLog(@"type: %i",[typeList count]);
+        //typeList = [[NSMutableArray alloc] init];
+        /*for (int c = 0; c<[typeList count]; c++) {
+            NSString *temp1 = [typeList objectAtIndex:c];
+            NSLog(@"temp1: %@",temp1);
+            NSMutableArray *col = [[NSMutableArray alloc] init];
+            for (int r = 0; r<[typeList count]; r++) {
+                Type *temp = [typeList objectAtIndex:r];
+                if ([temp1 isEqualToString:temp.type]){
+                    NSLog(@"hit");
+                    [col addObject:temp];
+                    
+                }
+            }*/
+           // NSLog(@"col: %i",[col count]);
+            //[typeList addObject: col];
+           // NSLog(@"typeList1: %i",[typeList count]);
+        //}
+        NSLog(@"typeList: %i",[typeList count]);
+    }
+    
+    //NSMutableArray *firstTypesArray = [[NSMutableArray alloc] initWithObjects:@"Hellos", @"Type 2", @"Type 3", nil];
     
     
     //Second section data
-    NSMutableArray *secondItemsArray = [[NSMutableArray alloc] initWithObjects:@"Item 4", @"Item 5", @"Item 6", @"Last Item", nil];
+    //NSMutableArray *secondTypesArray = [[NSMutableArray alloc] initWithObjects:@"Type 4", @"Type 5", @"Type 6", @"Last Type", nil];
     
     
     //Third section data
-    NSMutableArray *thirdItemsArray = [[NSMutableArray alloc] initWithObjects:@"Item 4", @"Item 5", @"Item 6", @"Last Item", nil];
+    //NSMutableArray *thirdTypesArray = [[NSMutableArray alloc] initWithObjects:@"Type 4", @"Type 5", @"Type 6", @"Last Type", nil];
     
-    dataArray = [[NSMutableArray alloc] initWithObjects: firstItemsArray, secondItemsArray, thirdItemsArray, nil];
+    //typeList = [[NSMutableArray alloc] initWithObjects: firstTypesArray, secondTypesArray, thirdTypesArray, nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,66 +149,16 @@ NSIndexPath *deleteIndexPath;
 }
 
 
+
+
 # pragma mark Table Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    
-    return [dataArray[section] count];
+    return [typeList count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [dataArray count];
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40.0f;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
-    UILabel *label = [[UILabel alloc] init];
-    label.frame = CGRectMake(10, 6, 300, 30);
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
-    //label.shadowColor = [UIColor whiteColor];
-    //label.shadowOffset = CGSizeMake(0.0, 1.0);
-    label.font = [UIFont boldSystemFontOfSize:19];
-    label.text = sectionTitle;
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    float rd = 42.00/255.00;
-    float gr = 205.00/255.00;
-    float bl = 192.00/255.00;
-    [headerView setBackgroundColor:[UIColor colorWithRed:rd green:gr blue:bl alpha:1.0]];
-    [headerView addSubview:label];
-    return headerView;
-    
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    
-    
-    
-    NSString *sectionName;
-    switch (section)
-    {
-        case 0:
-            sectionName = NSLocalizedString(@"Current", @"Current");
-            break;
-        case 1:
-            sectionName = NSLocalizedString(@"Previous", @"Previous");
-            break;
-        case 2:
-            sectionName = NSLocalizedString(@"Upcoming", @"Upcoming");
-            break;
-            // ...
-        default:
-            sectionName = @"";
-            break;
-    }
-    return sectionName;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -129,9 +170,8 @@ NSIndexPath *deleteIndexPath;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    NSMutableArray *array1 = [dataArray objectAtIndex:indexPath.section];
-    NSString *cellValue = [array1 objectAtIndex:indexPath.row];
-    cell.textLabel.text = cellValue;
+    Type *cellValue = [typeList objectAtIndex:indexPath.row];
+    cell.textLabel.text = cellValue.type;
     
     return cell;
 }
@@ -145,7 +185,7 @@ NSIndexPath *deleteIndexPath;
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         deleteIndexPath = indexPath;
-        NSString *rowValue = dataArray[deleteIndexPath.section][deleteIndexPath.row];
+        NSString *rowValue = typeList[deleteIndexPath.row];
         
         NSString *message = [[NSString alloc] initWithFormat:@"Delete %@?", rowValue];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message
@@ -162,8 +202,9 @@ NSIndexPath *deleteIndexPath;
 {
     if(buttonIndex == 1)//OK button pressed
     {NSLog(@"button 1");
-        
-        [dataArray[deleteIndexPath.section] removeObjectAtIndex:deleteIndexPath.row];
+        //[dataArray[deleteIndexPath.section] removeObjectAtIndex:deleteIndexPath.row];
+        [typeList removeObjectAtIndex:deleteIndexPath.row];
+       // [typelistTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
         [typelistTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
         NSLog(@"delete Item");
     }
@@ -177,9 +218,6 @@ NSIndexPath *deleteIndexPath;
 
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	
-	
-	
 	
 }
 
