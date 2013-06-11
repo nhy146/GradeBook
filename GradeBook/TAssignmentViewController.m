@@ -228,7 +228,7 @@ NSIndexPath *deleteIndexPath;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    [setting.score replaceObjectAtindex:]
+   // [setting.score replaceObjectAtindex:]
     
 }
 
