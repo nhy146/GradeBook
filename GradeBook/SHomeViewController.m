@@ -84,8 +84,6 @@ NSIndexPath *deleteIndexPath;
             
             // Create a String from your datasource
             
-            NSString *startString = course.start;
-            NSString *endString = course.end;
             NSString *startString = [dictTwo objectForKey:@"start"];
             NSString *endString = [dictTwo objectForKey:@"end"];
             NSLog(@"start = %@, end = %@",startString, endString);
@@ -112,18 +110,14 @@ NSIndexPath *deleteIndexPath;
             if ([startDate compare:today] == NSOrderedDescending) {
                 
             } else if ([startDate compare:today] == NSOrderedAscending) {
-                //NSLog(@"Start date is earlier than today = 1 or 2");
                 NSLog(@"Start date is earlier than today = 1 or 2");
                 if ([endDate compare:today] == NSOrderedAscending){
-                    //NSLog(@"endDate is earlier than today = Course is previous");
                     NSLog(@"endDate is earlier than today = Course is previous");
                     [secondItemsArray addObject:[dictTwo objectForKey:@"cname"]];
                 } else if ([endDate compare:today] == NSOrderedAscending){
-                    //NSLog(@"endDate is before today = Course is current");
                     NSLog(@"endDate is before today = Course is current");
                     [firstItemsArray addObject:[dictTwo objectForKey:@"cname"]];
                 } else {
-                    //NSLog(@"endDate is today = Course is current??");
                     NSLog(@"endDate is today = Course is current??");
                     [firstItemsArray addObject:[dictTwo objectForKey:@"cname"]];
                 }

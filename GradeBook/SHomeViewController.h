@@ -20,5 +20,4 @@
 @property (strong, nonatomic) NSArray *rows;
 @property (strong, nonatomic) NSString *studentID;
 @property (strong, nonatomic) Student *student;
-
 @end

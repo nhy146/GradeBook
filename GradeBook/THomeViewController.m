@@ -11,6 +11,8 @@
 #import "TCourseViewController.h"
 #import "Course.h"
 #import "Teacher.h"
+#import "Student.h"
+#import "EditViewController.h"
 
 @interface THomeViewController ()
 
@@ -69,7 +71,7 @@ NSIndexPath *deleteIndexPath;
     } else {
         NSLog(@"dictionary count = %i",[rows count]);
         //NSDictionary *dictTwo;// = [rows objectAtIndex: 0];
-        //Create section arrays
+    //Create section arrays
         //Current courses
         NSMutableArray *firstItemsArray = [[NSMutableArray alloc] init];
         
@@ -80,65 +82,65 @@ NSIndexPath *deleteIndexPath;
         
         //Upcoming courses
         NSMutableArray *thirdItemsArray = [[NSMutableArray alloc] init];
-        
+
         int count;
         for (count = [rows count]; count > 0; count--) {
             NSDictionary *dictTwo = [rows objectAtIndex:count-1];
             course = [[Course alloc] initWithId:[dictTwo objectForKey:@"cid"] teacherId:[dictTwo objectForKey:@"tid"]name:[dictTwo objectForKey:@"cname"] description:[dictTwo objectForKey:@"desc"] enrollmentKey:[dictTwo objectForKey:@"ekey"] startDate:[dictTwo objectForKey:@"start"] endDate:[dictTwo objectForKey:@"end"]school:[dictTwo objectForKey:@"school"]];
-            
+        
             // Create a String from your datasource
-            
+    
             NSString *startString = course.start;
             NSString *endString = course.end;
             NSLog(@"start = %@, end = %@",startString, endString);
-            
+    
             //Create a formatter
-            
+    
             NSDateFormatter *mysqlformat = [[NSDateFormatter alloc] init];
             [mysqlformat setDateFormat:@"yyyy-MM-dd"];
-            
+    
             //[formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-            
+    
             //Create your NSDate
-            
+    
             NSDate *startDate = [mysqlformat dateFromString:startString];
             NSDate *endDate = [mysqlformat dateFromString:endString];
-            
+    
             NSLog(@"start %@, end %@", startDate,endDate);
-            
-            
+
+    
             NSDate *today = [NSDate date];
-            
+    
             NSLog(@"now: %@", today); // now: 2011-02-28 09:57:49 +0000
-            
+        
             if ([startDate compare:today] == NSOrderedDescending) {
-               // NSLog(@"Start date is later than today = upcoming");
-                [thirdItemsArray addObject:course];
-                
+                NSLog(@"Start date is later than today = upcoming");
+                    [thirdItemsArray addObject:course];
+                            
             } else if ([startDate compare:today] == NSOrderedAscending) {
-                //NSLog(@"Start date is earlier than today = 1 or 2");
+                NSLog(@"Start date is earlier than today = 1 or 2");
                 if ([endDate compare:today] == NSOrderedAscending){
-                    //NSLog(@"endDate is earlier than today = Course is previous");
+                    NSLog(@"endDate is earlier than today = Course is previous");
                     [secondItemsArray addObject:course];
                 } else if ([endDate compare:today] == NSOrderedAscending){
-                   // NSLog(@"endDate is before today = Course is current");
+                    NSLog(@"endDate is before today = Course is current");
                     [firstItemsArray addObject:course];
                 } else {
-                    //NSLog(@"endDate is today = Course is current??");
+                    NSLog(@"endDate is today = Course is current??");
                     [firstItemsArray addObject:course];
                 }
-                
-            } else {
-                //NSLog(@"dates are the same = Course is current");
-                [firstItemsArray addObject:course];
-                
-            }
             
+            } else {
+                NSLog(@"dates are the same = Course is current");
+                [firstItemsArray addObject:course];
+            
+            }
+        
         }//end for
-        
-        
-        
-        dataArray = [[NSMutableArray alloc] initWithObjects: firstItemsArray, secondItemsArray, thirdItemsArray, nil];
+    
+
+   
+    dataArray = [[NSMutableArray alloc] initWithObjects: firstItemsArray, secondItemsArray, thirdItemsArray, nil];
     }
 }
 
@@ -156,6 +158,7 @@ NSIndexPath *deleteIndexPath;
 - (IBAction)newcourseButton:(id)sender {
 }
 - (IBAction)editButton:(id)sender {
+    [self performSegueWithIdentifier:@"THomeToEdit" sender:sender];
 }
 
 - (IBAction)helpButton:(id)sender {
@@ -166,7 +169,7 @@ NSIndexPath *deleteIndexPath;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    
+
     return [dataArray[section] count];
 }
 
@@ -253,9 +256,9 @@ NSIndexPath *deleteIndexPath;
         
         NSString *message = [[NSString alloc] initWithFormat:@"Delete %@?", rowValue];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message
-                              //delegate:self
+                                                        //delegate:self
                                                         message:@""
-                                                       delegate:self
+                                                        delegate:self
                                               cancelButtonTitle:@"No"
                                               otherButtonTitles:@"Delete",nil];
         [alert show];
@@ -273,9 +276,9 @@ NSIndexPath *deleteIndexPath;
     }
     if(buttonIndex == 0)
     {NSLog(@"button 0");
-        
+   
     }
-    
+
 }
 
 
@@ -300,13 +303,19 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         Course *cellValue = [array1 objectAtIndex:indexPath.row];
         [tcoursevc setCourse: cellValue];
         //need php code to get course id using teacher id and course name
+        
+    } else if ([[segue identifier] isEqualToString:@"THomeToEdit"]) {
+        EditViewController *teditvc = [segue destinationViewController];
+        [teditvc setTeacher: teacher];
+        [teditvc setStudent: [[Student alloc] initNull]];
     }
+    
 }
 
 
 - (IBAction)returnToTHomeActionForSegue:(UIStoryboardSegue *)returnSegue {
     
-    // do useful actions here.
+    // do useful actions here
     
 }
 
