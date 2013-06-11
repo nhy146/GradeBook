@@ -13,6 +13,7 @@
 @end
 
 @implementation ForgotPasswordViewController
+@synthesize emailTextField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +28,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    emailTextField.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,4 +37,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)cancelButton:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)sendpasswButton:(id)sender {
+}
+
+- (IBAction)openemailButton:(id)sender {
+}
+
+- (void) backgroundTapHideKeyboard:(id)sender{
+    
+    [emailTextField resignFirstResponder];
+}
 @end

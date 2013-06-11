@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DatePicker : UIDatePicker
-
+@property (strong, nonatomic) NSDateFormatter * dateFormatter;
+@property (strong, nonatomic) UITextField *textField;
+-(id) initWithDateFormatString: (NSString*) dateFormatString forTextField:(UITextField*)textField withDatePickerMode:(UIDatePickerMode) datePickerMode;
 @end
