@@ -8,13 +8,16 @@
 
 #import "SHomeViewController.h"
 #import "CJSONDeserializer.h"
-
+#import "Student.h"
+#import "Teacher.h"
+#import "EditViewController.h"
 
 @interface SHomeViewController ()
 
 @end
 
 @implementation SHomeViewController
+@synthesize courseTable, listData, dataArray, rows, studentID,student;
 NSIndexPath *deleteIndexPath;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -82,6 +85,7 @@ NSIndexPath *deleteIndexPath;
         for (count = [rows count]; count > 0; count--) {
             dictTwo = [rows objectAtIndex:count-1];
             
+            
             // Create a String from your datasource
             
             NSString *startString = [dictTwo objectForKey:@"start"];
@@ -108,6 +112,8 @@ NSIndexPath *deleteIndexPath;
             NSLog(@"now: %@", today); 
             
             if ([startDate compare:today] == NSOrderedDescending) {
+                NSLog(@"Start date is later than today = upcoming");
+                [thirdItemsArray addObject:[dictTwo objectForKey:@"cname"]];
                 
             } else if ([startDate compare:today] == NSOrderedAscending) {
                 NSLog(@"Start date is earlier than today = 1 or 2");
@@ -149,6 +155,7 @@ NSIndexPath *deleteIndexPath;
 }
 
 - (IBAction)editButton:(id)sender {
+     [self performSegueWithIdentifier:@"SHomeToEdit" sender:sender];
 }
 
 - (IBAction)signoutBurron:(id)sender {
@@ -284,8 +291,14 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
+    if ([[segue identifier] isEqualToString:@"SHomeToEdit"]) {
+        EditViewController *seditvc = [segue destinationViewController];
+        [seditvc setTeacher: [[Teacher alloc] initNull]];
+        [seditvc setStudent: student];
     }
+    
 }
+
 
 
 @end
