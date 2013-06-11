@@ -31,7 +31,7 @@ CGFloat				 animatedDistance;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"cid %@ ITEMS %@",cid,typeList);
+      NSLog(@"cid %@ ITEMS %@",cid,typeList);
 	// Do any additional setup after loading the view.
     assignmentnameTextField.backgroundColor = [UIColor whiteColor];
     typeTextField.backgroundColor = [UIColor whiteColor];
@@ -46,8 +46,8 @@ CGFloat				 animatedDistance;
     typeTextField.inputView = typePicker;
     typeTextField.inputAccessoryView = self.accessoryView;
     
-    
-    
+ 
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,13 +59,13 @@ CGFloat				 animatedDistance;
 - (void)goBack {
     int viewIndex = [[self.navigationController viewControllers] count];
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex: viewIndex - 1] animated:YES];
-    
+
 }
 
 - (IBAction)cancelButton:(id)sender {
-    //[self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:2] animated:YES];
+     //[self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:2] animated:YES];
     [self goBack];
-}
+   }
 
 - (void) backgroundTapHideKeyboard:(id)sender{
     
@@ -184,7 +184,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 140;
         //Ok button pressed
     }
     else if (buttonIndex == 1) {
-        //  [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] Animated:YES];
+      //  [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] Animated:YES];
         [self goBack];
     }
 }
@@ -246,10 +246,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 140;
 }
 
 /*- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
- {
- typeTextField.text = (NSString *)[typeList objectAtIndex:row];
- 
- }*/
+{
+    typeTextField.text = (NSString *)[typeList objectAtIndex:row];
+    
+}*/
 
 - (UIToolbar *)accessoryView {
     if ( accessoryView == nil ) {
@@ -268,9 +268,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 140;
     NSInteger row = [typePicker selectedRowInComponent:0];
     
     //if ( [typeTextField isFirstResponder] ) {
-    //startTextField.text = [locations objectAtIndex:row];
+        //startTextField.text = [locations objectAtIndex:row];
     typeTextField.text = [typeList objectAtIndex:row];
-    [typeTextField resignFirstResponder];
-}
+        [typeTextField resignFirstResponder];
+    }
 
 @end
