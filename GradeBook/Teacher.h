@@ -19,5 +19,5 @@
 @property (strong,nonatomic) NSString *hours;
 
 -(id)initWithId:(NSString *)tid firstName:(NSString *)tfname lastName:(NSString *)tlname email:(NSString *)temail userName:(NSString *)tuname password:(NSString *)tpassw officeLocation:(NSString *)office officeHours:(NSString *)hours;
-
+-(id)initNull;
 @end
