@@ -7,13 +7,14 @@
 //
 
 #import "EditViewController.h"
+#import "CJSONDeserializer.h"
 
 @interface EditViewController ()
 
 @end
 
 @implementation EditViewController
-@synthesize emailTextField, passwTextField;
+@synthesize fnameField, lnameField, emailTextField, passwTextField,teacher,student;
 CGFloat animatedDistance;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -29,8 +30,23 @@ CGFloat animatedDistance;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    // What should I sent to check whether it is student or teacher? Check whether the student.id and the teacher.id, if they are not equal 0 then change that. Can't since set object. So NSInterger ?
+    
+    if(![teacher.tid isEqualToString:@"00000000"]) {
+        // if teacher
+        fnameField.text = teacher.tfname;
+        lnameField.text = teacher.tlname;
+        emailTextField.placeholder = teacher.temail;
+    } else if (![student.sid isEqualToString:@"00000000"]) {
+        // if student
+        fnameField.text = student.sfname;
+        lnameField.text = student.slname;
+        emailTextField.placeholder = student.semail;
+    }
+    
     emailTextField.backgroundColor = [UIColor whiteColor];
     passwTextField.backgroundColor = [UIColor whiteColor];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,10 +58,124 @@ CGFloat animatedDistance;
 - (IBAction)doneButton:(id)sender {
     //code to update?? or do as leave textbox?
     //[self.navigationController popViewControllerAnimated:YES];
+    NSString *post = [[NSString alloc] init];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
+    
+    if(![teacher.tid isEqualToString:@"00000000"]) {
+        // if teacher
+        post =[NSString stringWithFormat:@"tid=%@&temail=%@&tpassw=%@",teacher.tid,[emailTextField text],[passwTextField text]];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+
+        [request setURL:[NSURL URLWithString:@"http://lsucptg434gb.summerhost.info/app_file/tupdate_info.php"]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+        
+        NSHTTPURLResponse* urlResponse = nil;
+        NSError *error = [[NSError alloc] init];
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        NSLog(@"%@", urlResponse);
+        NSDictionary * dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:responseData error:&error];
+        NSString *result = [[NSString alloc] init];
+        if (dict)
+        {
+            result = [dict objectForKey:@"success"];
+        }
+        
+        if ([result intValue] == 1) {
+            [self alertStatus:@"Update successfule":@"Congrat"];
+        } else {
+            [self alertStatus:@"Update failed. Please try again":@"Oh oh"];
+        }
+
+
+        
+    } else if (![student.sid isEqualToString:@"00000000"]) {
+        // if student
+        post =[NSString stringWithFormat:@"sid=%@&semail=%@&spassw=%@",student.sid,[emailTextField text],[passwTextField text]];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+
+        [request setURL:[NSURL URLWithString:@"http://lsucptg434gb.summerhost.info/app_file/supdate_info.php"]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+        
+        NSHTTPURLResponse* urlResponse = nil;
+        NSError *error = [[NSError alloc] init];
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        NSDictionary * dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:responseData error:&error];
+        NSString *result = [[NSString alloc] init];
+        if (dict)
+        {
+            result = [dict objectForKey:@"success"];
+        }
+        
+        if ([result intValue] == 1) {
+            [self alertStatus:@"Update successfule":@"Congrat"];
+        } else {
+            [self alertStatus:@"Update failed. Please try again":@"Oh oh"];
+        }
+        
+
+
+        
+    }
+
+    
+   
+    
+    /*NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    
+    
+    NSHTTPURLResponse* urlResponse = nil;
+    NSError *error = [[NSError alloc] init];
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+    NSDictionary * dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:responseData error:&error];
+    NSString *result = [[NSString alloc] init];
+    if (dict)
+    {
+        result = [dict objectForKey:@"success"];
+    }
+    
+    if ([result intValue] == 1) {
+        [self alertStatus:@"Update successfule":@"Congrat"];
+    } else {
+        [self alertStatus:@"Update failed. Please try again":@"Oh oh"];
+    }*/
+
+    
+    
+    
 }
 
+- (void) alertStatus:(NSString *)msg :(NSString *)title
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:msg
+                                                       delegate:self
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil, nil];
+    
+    [alertView show];
+}
+
+
 - (IBAction)cancelButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    int viewIndex = [[self.navigationController viewControllers] count];
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex: viewIndex - 1] animated:YES];
+
 }
 
 
