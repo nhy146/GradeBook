@@ -7,12 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AssignmentDataTable.h"
+#import "Item.h"
 
 @interface TAssignmentViewController : UIViewController
-- (IBAction)backButton:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UILabel *assignmentLabel;
 @property (weak, nonatomic) IBOutlet UITableView *scoreTable;
-- (IBAction)reportsButton:(id)sender;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic) AssignmentDataTable *setting;
+@property (strong, nonatomic) UILabel *fname;
+@property (strong, nonatomic) UILabel *lname;
+//@property (strong, nonatomic) UILabel *sid;;
+@property (strong, nonatomic) IBOutlet UITextField *scoreField;
+@property (strong, nonatomic) IBOutlet Item *item;
+@property (nonatomic, retain) IBOutlet UITableViewCell *settingsCell;
+@property (nonatomic, retain) NSMutableArray *listOfRows;
+
+- (IBAction)backButton:(id)sender;
+- (IBAction)reportsButton:(id)sender;
 
 @end

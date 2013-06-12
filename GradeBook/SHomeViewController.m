@@ -8,15 +8,16 @@
 
 #import "SHomeViewController.h"
 #import "CJSONDeserializer.h"
-#import "SCourseViewController.h"
-
+#import "Student.h"
+#import "Teacher.h"
+#import "EditViewController.h"
 
 @interface SHomeViewController ()
 
 @end
 
 @implementation SHomeViewController
-@synthesize courseTable, listData, dataArray, rows,student,course;
+@synthesize courseTable, listData, dataArray, rows, studentID,student;
 NSIndexPath *deleteIndexPath;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,7 +35,7 @@ NSIndexPath *deleteIndexPath;
 	// Do any additional setup after loading the view.
     courseTable.backgroundView = nil;
    
-    NSLog(@"Student id = %@",student.sid);
+    NSLog(@"Student id = %@",studentID);
     
     NSString *post =[NSString stringWithFormat:@"sid=%@",student.sid];
     
@@ -83,12 +84,12 @@ NSIndexPath *deleteIndexPath;
         int count;
         for (count = [rows count]; count > 0; count--) {
             dictTwo = [rows objectAtIndex:count-1];
-            course = [[Course alloc] initWithId:[dictTwo objectForKey:@"cid"] teacherId:[dictTwo objectForKey:@"tid"]name:[dictTwo objectForKey:@"cname"] description:[dictTwo objectForKey:@"desc"] enrollmentKey:[dictTwo objectForKey:@"ekey"] startDate:[dictTwo objectForKey:@"start"] endDate:[dictTwo objectForKey:@"end"]school:[dictTwo objectForKey:@"school"]];
+            
             
             // Create a String from your datasource
             
-            NSString *startString = course.start;
-            NSString *endString = course.end;
+            NSString *startString = [dictTwo objectForKey:@"start"];
+            NSString *endString = [dictTwo objectForKey:@"end"];
             NSLog(@"start = %@, end = %@",startString, endString);
             
             //Create a formatter
@@ -111,25 +112,25 @@ NSIndexPath *deleteIndexPath;
             NSLog(@"now: %@", today); 
             
             if ([startDate compare:today] == NSOrderedDescending) {
-                //NSLog(@"Start date is later than today = upcoming");
-                [thirdItemsArray addObject:course];
+                NSLog(@"Start date is later than today = upcoming");
+                [thirdItemsArray addObject:[dictTwo objectForKey:@"cname"]];
                 
             } else if ([startDate compare:today] == NSOrderedAscending) {
-                //NSLog(@"Start date is earlier than today = 1 or 2");
+                NSLog(@"Start date is earlier than today = 1 or 2");
                 if ([endDate compare:today] == NSOrderedAscending){
-                    //NSLog(@"endDate is earlier than today = Course is previous");
-                    [secondItemsArray addObject:course];
+                    NSLog(@"endDate is earlier than today = Course is previous");
+                    [secondItemsArray addObject:[dictTwo objectForKey:@"cname"]];
                 } else if ([endDate compare:today] == NSOrderedAscending){
-                    //NSLog(@"endDate is before today = Course is current");
-                    [firstItemsArray addObject:course];
+                    NSLog(@"endDate is before today = Course is current");
+                    [firstItemsArray addObject:[dictTwo objectForKey:@"cname"]];
                 } else {
-                    //NSLog(@"endDate is today = Course is current??");
-                    [firstItemsArray addObject:course];
+                    NSLog(@"endDate is today = Course is current??");
+                    [firstItemsArray addObject:[dictTwo objectForKey:@"cname"]];
                 }
                 
             } else {
                 NSLog(@"dates are the same = Course is current");
-                [firstItemsArray addObject:course];
+                [firstItemsArray addObject:[dictTwo objectForKey:@"cname"]];
                 
             }
             
@@ -154,6 +155,7 @@ NSIndexPath *deleteIndexPath;
 }
 
 - (IBAction)editButton:(id)sender {
+     [self performSegueWithIdentifier:@"SHomeToEdit" sender:sender];
 }
 
 - (IBAction)signoutBurron:(id)sender {
@@ -233,8 +235,8 @@ NSIndexPath *deleteIndexPath;
     }
     
     NSMutableArray *array1 = [dataArray objectAtIndex:indexPath.section];
-    Course *cellValue = [array1 objectAtIndex:indexPath.row];
-    cell.textLabel.text = cellValue.cname;
+    NSString *cellValue = [array1 objectAtIndex:indexPath.row];
+    cell.textLabel.text = cellValue;
     
     return cell;
 }
@@ -282,26 +284,21 @@ NSIndexPath *deleteIndexPath;
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	
 	
-	[self performSegueWithIdentifier:@"SHomeToSCourse" sender:indexPath];
+	
 	
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    
-    if ([[segue identifier] isEqualToString:@"SHomeToSCourse"])
-    {
-        SCourseViewController *scoursevc = [segue destinationViewController];
-        NSIndexPath * indexPath = (NSIndexPath*)sender;
-        NSLog(@"%@",indexPath);
-        NSMutableArray *array1 = [dataArray objectAtIndex:indexPath.section];
-        Course *cellValue = [array1 objectAtIndex:indexPath.row];
-        [scoursevc setCourse: cellValue];
-        [scoursevc setStudent: student];
-        //need php code to get course id using teacher id and course name
+    if ([[segue identifier] isEqualToString:@"SHomeToEdit"]) {
+        EditViewController *seditvc = [segue destinationViewController];
+        [seditvc setTeacher: [[Teacher alloc] initNull]];
+        [seditvc setStudent: student];
     }
+    
 }
+
 
 
 @end

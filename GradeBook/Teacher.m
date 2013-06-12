@@ -38,4 +38,20 @@
     return nil;
 }
 
+-(id)initNull {
+    self = [super init];
+    if (self) {
+        _tid = @"00000000";
+        _tfname = @"nofname";
+        _tlname = @"nolname";
+        _temail = @"notemail";
+        _tuname = @"notuname";
+        _tpassw = @"notpassw";
+        
+        return self;
+    }
+    return nil;
+}
+
+
 @end

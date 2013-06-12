@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E627FA21767DBF90042F80C /* AssignmentDataTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E627FA11767DBF90042F80C /* AssignmentDataTable.m */; };
 		4D1D998717586B2100DA115D /* CreateScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D998617586B2100DA115D /* CreateScoreViewController.m */; };
 		4D996B7317453CC200529162 /* custom_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D996B7217453CC200529162 /* custom_add.png */; };
 		4D996B751745D29100529162 /* custom_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D996B741745D28E00529162 /* custom_button.png */; };
@@ -52,6 +53,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E627FA01767DBF90042F80C /* AssignmentDataTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDataTable.h; sourceTree = "<group>"; };
+		3E627FA11767DBF90042F80C /* AssignmentDataTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDataTable.m; sourceTree = "<group>"; };
 		4D1D998517586B2100DA115D /* CreateScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateScoreViewController.h; sourceTree = "<group>"; };
 		4D1D998617586B2100DA115D /* CreateScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateScoreViewController.m; sourceTree = "<group>"; };
 		4D996B7217453CC200529162 /* custom_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom_add.png; sourceTree = "<group>"; };
@@ -270,6 +273,8 @@
 				4DEE95D1172A442800C7EC83 /* Default.png */,
 				4DEE95D3172A442800C7EC83 /* Default@2x.png */,
 				4DEE95D5172A442800C7EC83 /* Default-568h@2x.png */,
+				3E627FA01767DBF90042F80C /* AssignmentDataTable.h */,
+				3E627FA11767DBF90042F80C /* AssignmentDataTable.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -373,6 +378,7 @@
 				4D9C18211760FA67002E1FE0 /* Type.m in Sources */,
 				4D9C18241760FAED002E1FE0 /* Item.m in Sources */,
 				4DDADA971762500E0093152A /* TypePicker.m in Sources */,
+				3E627FA21767DBF90042F80C /* AssignmentDataTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
