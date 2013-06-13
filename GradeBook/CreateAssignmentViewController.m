@@ -9,6 +9,7 @@
 #import "CreateAssignmentViewController.h"
 #import "Course.h"
 #import "CJSONDeserializer.h"
+#import "TCourseViewController.h"
 
 
 @interface CreateAssignmentViewController ()
@@ -16,7 +17,7 @@
 @end
 
 @implementation CreateAssignmentViewController
-@synthesize assignmentnameTextField, typeTextField, pointspossibleTextField, duedateTextField,cid,typeList,accessoryView,typePicker;
+@synthesize assignmentnameTextField, typeTextField, pointspossibleTextField, duedateTextField,course,typeList,accessoryView,typePicker;
 CGFloat				 animatedDistance;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,7 +32,7 @@ CGFloat				 animatedDistance;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-      NSLog(@"cid %@ ITEMS %@",cid,typeList);
+      NSLog(@"cid %@ ITEMS %@",course.cid,typeList);
 	// Do any additional setup after loading the view.
     assignmentnameTextField.backgroundColor = [UIColor whiteColor];
     typeTextField.backgroundColor = [UIColor whiteColor];
@@ -64,7 +65,8 @@ CGFloat				 animatedDistance;
 
 - (IBAction)cancelButton:(id)sender {
      //[self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:2] animated:YES];
-    [self goBack];
+    //[self goBack];
+    [self performSegueWithIdentifier:@"TCreateAssignmentToTCourse" sender:sender];
    }
 
 - (void) backgroundTapHideKeyboard:(id)sender{
@@ -185,17 +187,21 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 140;
     }
     else if (buttonIndex == 1) {
       //  [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] Animated:YES];
-        [self goBack];
+        //[self goBack];
+        [self performSegueWithIdentifier:@"TCreateAssignmentToTCourse" sender:self
+         ];
+        
     }
 }
 
 
 - (IBAction) createButtonPressed:(id)sender {
+    NSLog(@"Create Button Pressed");
     if([[assignmentnameTextField text] isEqualToString:@""] || [[typeTextField text] isEqualToString:@""] || [[pointspossibleTextField text] isEqualToString:@""] || [[duedateTextField text] isEqualToString:@""] ) {
         [self alertStatus:@"Please fill in all the field" :@"Create an Assignment Failed!"];
     } else {
         //////////
-        NSString *post =[NSString stringWithFormat:@"iname=%@&type=%@&points=%@&cid=%@&due=%@",[assignmentnameTextField text],[typeTextField text],[pointspossibleTextField text],cid,[duedateTextField text]];
+        NSString *post =[NSString stringWithFormat:@"iname=%@&type=%@&points=%@&cid=%@&due=%@",[assignmentnameTextField text],[typeTextField text],[pointspossibleTextField text],course.cid,[duedateTextField text]];
         
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
@@ -258,6 +264,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 140;
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStylePlain
                                                                                     target:self
                                                                                     action:@selector(typeSelected)];
+        
         [accessoryView setItems:[NSArray arrayWithObject:doneButton]];
     }
     
@@ -269,8 +276,22 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 140;
     
     //if ( [typeTextField isFirstResponder] ) {
         //startTextField.text = [locations objectAtIndex:row];
-    typeTextField.text = [typeList objectAtIndex:row];
+        typeTextField.text = [typeList objectAtIndex:row];
         [typeTextField resignFirstResponder];
     }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    
+    if ([[segue identifier] isEqualToString:@"TCreateAssignmentToTCourse"])
+    {
+         TCourseViewController *tcoursevc = [segue destinationViewController];
+        [tcoursevc setCourse: course];
+        
+    }
+    
+}
+
 
 @end

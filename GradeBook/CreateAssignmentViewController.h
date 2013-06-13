@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Course.h"
 
 @interface CreateAssignmentViewController : UIViewController
 - (IBAction)cancelButton:(id)sender;
@@ -16,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *duedateTextField;
 @property (weak, nonatomic) IBOutlet UIButton *createButton;
 @property (strong, nonatomic) NSArray *typeList;
-@property (strong, nonatomic) NSString *cid;
+@property (strong, nonatomic) Course *course;
 @property (strong, nonatomic) UIPickerView *typePicker;
 @property (nonatomic, readonly) UIToolbar *accessoryView;
 
