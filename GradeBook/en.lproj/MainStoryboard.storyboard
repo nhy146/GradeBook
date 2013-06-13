@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Gan-FG-VVR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Gan-FG-VVR">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
     <scenes>
         <!--Enroll View Controller - Enroll-->
@@ -213,7 +213,7 @@
             <objects>
                 <viewController id="bq8-6Z-rmK" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W5P-8b-hFa">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bn3-JE-Kbh">
@@ -289,7 +289,7 @@
             <objects>
                 <viewController title="TCourse" id="TQg-ia-oXf" customClass="TCourseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tqD-O8-UHg">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxd-id-RJt">
@@ -425,6 +425,7 @@
                             <constraint firstItem="Owm-qc-qC6" firstAttribute="leading" secondItem="Enc-Mw-UEU" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="FMI-HE-av6"/>
                             <constraint firstItem="eTc-6v-DjX" firstAttribute="top" secondItem="mwZ-9k-HAw" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="GN9-5E-bf8"/>
                             <constraint firstItem="O9V-Kc-w50" firstAttribute="trailing" secondItem="Enc-Mw-UEU" secondAttribute="trailing" type="default" id="JCa-GY-LqH"/>
+                            <constraint firstItem="O3P-Lq-n9s" firstAttribute="top" secondItem="tqD-O8-UHg" secondAttribute="top" constant="227" id="MWr-oX-IYX"/>
                             <constraint firstItem="Owm-qc-qC6" firstAttribute="trailing" secondItem="Lnc-QW-8UR" secondAttribute="trailing" type="default" id="QoG-nZ-HMa"/>
                             <constraint firstItem="O9V-Kc-w50" firstAttribute="leading" secondItem="O3P-Lq-n9s" secondAttribute="leading" type="default" id="XF2-lD-V5S"/>
                             <constraint firstItem="eTc-6v-DjX" firstAttribute="leading" secondItem="tqD-O8-UHg" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="ZCa-td-Drh"/>
@@ -435,8 +436,7 @@
                             <constraint firstItem="O9V-Kc-w50" firstAttribute="top" secondItem="Lnc-QW-8UR" secondAttribute="top" type="default" id="qU8-qx-n9j"/>
                             <constraint firstItem="O3P-Lq-n9s" firstAttribute="trailing" secondItem="Lnc-QW-8UR" secondAttribute="trailing" type="default" id="rph-jc-UCA"/>
                             <constraint firstItem="Enc-Mw-UEU" firstAttribute="top" secondItem="eTc-6v-DjX" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="tiZ-9u-dim"/>
-                            <constraint firstItem="O3P-Lq-n9s" firstAttribute="top" secondItem="Lnc-QW-8UR" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="vhj-ad-ID4"/>
-                            <constraint firstAttribute="bottom" secondItem="O3P-Lq-n9s" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="we8-8h-tZM"/>
+                            <constraint firstItem="O9V-Kc-w50" firstAttribute="top" secondItem="tqD-O8-UHg" secondAttribute="top" constant="185" id="wyx-Yf-C4i"/>
                             <constraint firstItem="Enc-Mw-UEU" firstAttribute="top" secondItem="W7B-ho-ISI" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="yiN-gs-n6Z"/>
                             <constraint firstItem="mwZ-9k-HAw" firstAttribute="leading" secondItem="tqD-O8-UHg" secondAttribute="leading" constant="19" id="zh0-2G-A66"/>
                         </constraints>
@@ -446,6 +446,7 @@
                         <outlet property="assignmentTable" destination="O3P-Lq-n9s" id="Uoy-5n-mi7"/>
                         <outlet property="coursenameLabel" destination="W7B-ho-ISI" id="vzM-eo-q8m"/>
                         <segue destination="rKq-e1-LXm" kind="push" identifier="TCourseToCreateAssignment" id="q0g-xC-VZF"/>
+                        <segue destination="nkM-qe-thl" kind="push" identifier="TCourseToTAssignment" id="3FQ-00-GDx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kk6-pe-W6B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1046,7 +1047,7 @@
             <objects>
                 <viewController id="9N3-Wy-C8H" customClass="CreateTypeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bxA-0Z-xfY">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMA-NZ-4rE">
@@ -1476,7 +1477,7 @@
             <objects>
                 <viewController id="nkM-qe-thl" customClass="TAssignmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A58-tu-VPi">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZb-zm-Bk3">
@@ -1584,7 +1585,7 @@
             <objects>
                 <viewController id="rKq-e1-LXm" customClass="CreateAssignmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2AD-3B-cSp" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Create Assignment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0T-bw-RDk">
@@ -1643,7 +1644,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="TQg-ia-oXf" kind="push" identifier="TCourseToCreateAssignment" id="P03-85-MRv"/>
+                                    <action selector="createButtonPressed:" destination="rKq-e1-LXm" eventType="touchUpInside" id="mbd-qJ-b0A"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTj-mv-YGZ">
@@ -1671,14 +1672,14 @@
                             <constraint firstItem="WRD-td-suc" firstAttribute="centerX" secondItem="2AD-3B-cSp" secondAttribute="centerX" type="default" id="UFC-Na-0X7"/>
                             <constraint firstItem="F4P-5C-xOR" firstAttribute="leading" secondItem="tWJ-jZ-Tqw" secondAttribute="leading" type="default" id="W9f-KJ-wI0"/>
                             <constraint firstItem="q9U-6n-VUy" firstAttribute="trailing" secondItem="F4P-5C-xOR" secondAttribute="trailing" type="default" id="Xi4-Wz-Zpg"/>
+                            <constraint firstAttribute="bottom" secondItem="rIe-xo-lE0" secondAttribute="bottom" constant="183" id="aRK-wD-VTb"/>
                             <constraint firstItem="q0T-bw-RDk" firstAttribute="top" secondItem="2AD-3B-cSp" secondAttribute="top" constant="108" id="in4-or-JJl"/>
                             <constraint firstItem="q0T-bw-RDk" firstAttribute="leading" secondItem="2AD-3B-cSp" secondAttribute="leading" constant="45" id="lJE-Lg-ZCh"/>
+                            <constraint firstItem="q9U-6n-VUy" firstAttribute="top" secondItem="2AD-3B-cSp" secondAttribute="top" constant="253" id="mjE-MH-1b1"/>
                             <constraint firstItem="tWJ-jZ-Tqw" firstAttribute="top" secondItem="2AD-3B-cSp" secondAttribute="top" constant="162" id="nv1-i2-EGE"/>
-                            <constraint firstItem="q9U-6n-VUy" firstAttribute="top" secondItem="2AD-3B-cSp" secondAttribute="top" constant="254" id="p32-JF-lvZ"/>
-                            <constraint firstAttribute="bottom" secondItem="WRD-td-suc" secondAttribute="bottom" constant="96" id="qhF-DD-U3a"/>
                             <constraint firstItem="mTj-mv-YGZ" firstAttribute="top" secondItem="2AD-3B-cSp" secondAttribute="top" constant="20" symbolic="YES" type="default" id="sgK-ta-S9e"/>
                             <constraint firstItem="tWJ-jZ-Tqw" firstAttribute="leading" secondItem="q0T-bw-RDk" secondAttribute="leading" type="default" id="vLC-0V-noE"/>
-                            <constraint firstAttribute="bottom" secondItem="rIe-xo-lE0" secondAttribute="bottom" constant="172" id="zyx-SB-R5y"/>
+                            <constraint firstAttribute="bottom" secondItem="WRD-td-suc" secondAttribute="bottom" constant="82" id="ymp-Yi-u0y"/>
                         </constraints>
                         <connections>
                             <action selector="backgroundTapHideKeyboard:" destination="rKq-e1-LXm" eventType="touchDown" id="2EC-dJ-oyN"/>
@@ -1691,6 +1692,7 @@
                         <outlet property="duedateTextField" destination="rIe-xo-lE0" id="wXZ-Bf-sqR"/>
                         <outlet property="pointspossibleTextField" destination="q9U-6n-VUy" id="omM-kp-8YE"/>
                         <outlet property="typeTextField" destination="F4P-5C-xOR" id="1eA-Uj-2lx"/>
+                        <segue destination="TQg-ia-oXf" kind="push" identifier="TCreateAssignmentToTCourse" id="ozp-04-FAs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5WM-E3-oXI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1769,8 +1771,8 @@
                 <relationship kind="action" name="doneButton:"/>
                 <relationship kind="outlet" name="cancelButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="fnameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="lnameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="fnameField" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lnameField" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="passwTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -1795,6 +1797,9 @@
                 <relationship kind="action" name="sendpasswButton:"/>
                 <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
             </relationships>
+        </class>
+        <class className="Item" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/Item.h"/>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
@@ -1822,6 +1827,7 @@
             <relationships>
                 <relationship kind="action" name="backgroundTapHideKeyboard:"/>
                 <relationship kind="action" name="helpButton:"/>
+                <relationship kind="action" name="returnToSignInActionForSegue:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="action" name="signinButton:"/>
                 <relationship kind="outlet" name="passwTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="signinButton" candidateClass="UIButton"/>
@@ -1835,7 +1841,10 @@
                 <relationship kind="action" name="backButton:"/>
                 <relationship kind="action" name="reportsButton:"/>
                 <relationship kind="outlet" name="assignmentLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="item" candidateClass="Item"/>
+                <relationship kind="outlet" name="scoreField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="scoreTable" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="settingsCell" candidateClass="UITableViewCell"/>
             </relationships>
         </class>
         <class className="TCourseViewController" superclassName="UIViewController">
@@ -1858,6 +1867,7 @@
                 <relationship kind="action" name="helpButton:"/>
                 <relationship kind="action" name="newcourseButton:"/>
                 <relationship kind="action" name="returnActionForSegue:" candidateClass="UIStoryboardSegue"/>
+                <relationship kind="action" name="returnToTHomeActionForSegue:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="action" name="signoutButton:"/>
                 <relationship kind="outlet" name="courseTable" candidateClass="UITableView"/>
             </relationships>
@@ -1872,7 +1882,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="P03-85-MRv"/>
+        <segue reference="ozp-04-FAs"/>
         <segue reference="hKC-Be-whP"/>
         <segue reference="CCP-KT-qH1"/>
         <segue reference="3b4-wa-Lxh"/>

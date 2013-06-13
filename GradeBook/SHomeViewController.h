@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Student.h"
-#import "Course.h"
 
 @interface SHomeViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *courseTable;
@@ -21,6 +20,4 @@
 @property (strong, nonatomic) NSArray *rows;
 @property (strong, nonatomic) NSString *studentID;
 @property (strong, nonatomic) Student *student;
-@property (strong, nonatomic) Course *course;
-
 @end

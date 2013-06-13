@@ -13,7 +13,7 @@
 #import "TAssignmentViewController.h"
 #import "Course.h"
 #import "Item.h"
-
+#import "CreateTypeViewController.h"
 
 
 @interface TCourseViewController ()
@@ -23,6 +23,7 @@
 @implementation TCourseViewController
 @synthesize dataArray, assignmentTable, course, item, typeList;
 NSIndexPath *deleteIndexPath;
+NSIndexPath *selectIndexPath;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,12 +44,14 @@ NSIndexPath *deleteIndexPath;
     
     NSString *post =[NSString stringWithFormat:@"cid=%@",course.cid];
     
+    NSLog(@"%@",post);
+    
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
-    [request setURL:[NSURL URLWithString:@"http://lsucptg434gb.summerhost.info/app_file/tview_item.php"]];
+    [request setURL:[NSURL URLWithString:@"http://lsucptg434gb.summerhost.info/app_file/tview_type.php"]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -61,14 +64,16 @@ NSIndexPath *deleteIndexPath;
     NSDictionary * dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:responseData error:&error];
     NSArray *rows = [[NSArray alloc] init];
     if (dict) {
+        NSLog(@"Hello");
         rows = [dict objectForKey:@"records"];
     }
+    NSLog(@"Row: %@",rows);
     typeList = [[NSMutableArray alloc] init];
     if([rows count] == 0) {
         NSLog(@"No type returned\n");
     } else {
         NSLog(@"There are %i type(s)", [rows count]);
-        for (int k = 0; k < [rows count]; k++) {
+            for (int k = 0; k < [rows count]; k++) {
             NSDictionary *typeDict = [rows objectAtIndex:k];
             [typeList addObject:[typeDict objectForKey:@"type"]];
         }
@@ -202,6 +207,22 @@ NSIndexPath *deleteIndexPath;
     
     NSString *sectionName;
     sectionName = [typeList objectAtIndex:section];
+    /*switch (section)
+    {
+        case 0:
+            sectionName = NSLocalizedString(@"Current", @"Current");
+            break;
+        case 1:
+            sectionName = NSLocalizedString(@"Previous", @"Previous");
+            break;
+        case 2:
+            sectionName = NSLocalizedString(@"Upcoming", @"Upcoming");
+            break;
+            // ...
+        default:
+            sectionName = @"";
+            break;
+    }*/
     return sectionName;
 }
 
@@ -262,6 +283,8 @@ NSIndexPath *deleteIndexPath;
 
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    selectIndexPath = indexPath;
+    [self performSegueWithIdentifier:@"TCourseToTAssignment" sender:self];
 	
 	
 	
@@ -273,13 +296,32 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     // Make sure your segue name in storyboard is the same as this line
     if ([[segue identifier] isEqualToString:@"TCourseToCreateAssignment"]) {
         CreateAssignmentViewController *cAssigvc = [segue destinationViewController];
+        [cAssigvc setCourse: course];
+        [cAssigvc setTypeList: typeList];
+        
+    } else if ([[segue identifier] isEqualToString:@"TCourseViewToCreateType"]) {
+        CreateTypeViewController *cTypevc = [segue destinationViewController];
+        NSLog(@"\n\nCID = um wat %@",course.cid);
         NSString *cid = course.cid;
-        [cAssigvc setCid: cid];
-        [cAssigvc setTypeList:typeList];
-        NSLog(@"CID %@",cid);
+        [cTypevc setCid: cid];
+        
+    } else if ([[segue identifier] isEqualToString:@"TCourseToTAssignment"]) {
+        TAssignmentViewController *tassivc = [segue destinationViewController];
+       // NSIndexPath * indexPath = (NSIndexPath*)sender;
+        //NSLog(@"%@",indexPath);
+        NSMutableArray *array1 = [dataArray objectAtIndex:selectIndexPath.section];
+        Item *cellValue = [array1 objectAtIndex:selectIndexPath.row];
+        [tassivc setItem: cellValue];
+
         
     }
 }
 
+
+- (IBAction)returnToTCourseActionForSegue:(UIStoryboardSegue *)returnSegue {
+    
+    // do useful actions here.
+    
+}
 
 @end
