@@ -23,6 +23,7 @@
 @implementation TCourseViewController
 @synthesize dataArray, assignmentTable, course, item, typeList;
 NSIndexPath *deleteIndexPath;
+NSIndexPath *selectIndexPath;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -282,6 +283,8 @@ NSIndexPath *deleteIndexPath;
 
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    selectIndexPath = indexPath;
+    [self performSegueWithIdentifier:@"TCourseToTAssignment" sender:self];
 	
 	
 	
@@ -293,8 +296,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     // Make sure your segue name in storyboard is the same as this line
     if ([[segue identifier] isEqualToString:@"TCourseToCreateAssignment"]) {
         CreateAssignmentViewController *cAssigvc = [segue destinationViewController];
-        NSString *cid = course.cid;
-        [cAssigvc setCid: cid];
+        [cAssigvc setCourse: course];
         [cAssigvc setTypeList: typeList];
         
     } else if ([[segue identifier] isEqualToString:@"TCourseViewToCreateType"]) {
@@ -302,6 +304,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         NSLog(@"\n\nCID = um wat %@",course.cid);
         NSString *cid = course.cid;
         [cTypevc setCid: cid];
+        
+    } else if ([[segue identifier] isEqualToString:@"TCourseToTAssignment"]) {
+        TAssignmentViewController *tassivc = [segue destinationViewController];
+       // NSIndexPath * indexPath = (NSIndexPath*)sender;
+        //NSLog(@"%@",indexPath);
+        NSMutableArray *array1 = [dataArray objectAtIndex:selectIndexPath.section];
+        Item *cellValue = [array1 objectAtIndex:selectIndexPath.row];
+        [tassivc setItem: cellValue];
+
+        
     }
 }
 

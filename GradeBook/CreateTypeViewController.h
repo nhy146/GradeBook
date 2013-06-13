@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *typenameTextField;
 - (IBAction)backButton:(id)sender;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic) NSString *cid;
+
 
 
 @end
